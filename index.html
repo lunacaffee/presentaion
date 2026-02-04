@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم سفرة الدار</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables - Premium Colors */
+        :root {
+            --orange-primary: #FF6B00;
+            --orange-secondary: #FF8F33;
+            --orange-accent: #FFB366;
+            --orange-dark: #E55A00;
+            --gold-primary: #FFD166;
+            --gold-secondary: #FFE0A3;
+            --dark-bg: #000000;
+            --dark-surface: #111111;
+            --light-text: #FFFFFF;
+            --light-text-secondary: rgba(255, 255, 255, 0.8);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--light-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Glowing Particles */
+        .glow-particle {
+            position: fixed;
+            background: radial-gradient(circle, var(--orange-primary), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+            animation: floatParticle 20s infinite linear;
+        }
+
+        /* Premium Intro Styles */
+        #intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Premium Logo Container */
+        .logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Modern Minimalist Frame */
+        .logo-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, 
+                var(--orange-primary) 0%, 
+                var(--gold-primary) 25%, 
+                var(--orange-secondary) 50%, 
+                var(--gold-secondary) 75%, 
+                var(--orange-primary) 100%);
+            background-size: 300% 300%;
+            animation: gradientRotate 3s ease infinite, frameGlow 2s ease-in-out infinite alternate;
+            box-shadow: 
+                0 0 40px rgba(255, 107, 0, 0.4),
+                0 0 80px rgba(255, 107, 0, 0.2),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-frame::before {
+            content: '';
+            position: absolute;
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            background: var(--dark-surface);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Elegant Corner Decorations */
+        .corner-decoration {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid var(--orange-primary);
+            border-radius: 50%;
+            animation: cornerPulse 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .corner-decoration:nth-child(1) { top: 15px; left: 15px; }
+        .corner-decoration:nth-child(2) { top: 15px; right: 15px; }
+        .corner-decoration:nth-child(3) { bottom: 15px; left: 15px; }
+        .corner-decoration:nth-child(4) { bottom: 15px; right: 15px; }
+
+        /* Main Logo */
+        .logo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: url('https://iili.io/fj31YHN.md.png') center/contain no-repeat;
+            background-color: rgba(255, 255, 255, 0.02);
+            z-index: 3;
+            position: relative;
+            box-shadow: 
+                inset 0 0 30px rgba(0, 0, 0, 0.7),
+                0 0 20px rgba(255, 107, 0, 0.3);
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(255, 107, 0, 0.1), 
+                transparent);
+            z-index: -1;
+            animation: shineRotate 6s linear infinite;
+        }
+
+        /* Loading Bar - Premium Design */
+        .loading-container {
+            width: 90%;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .loading-bar-container {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .loading-bar-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, 
+                var(--orange-primary) 0%, 
+                var(--gold-primary) 50%, 
+                var(--orange-primary) 100%);
+            border-radius: 2px;
+            animation: loading 3s ease-in-out forwards;
+            box-shadow: 0 0 15px var(--orange-primary);
+        }
+
+        .loading-text {
+            font-size: 1rem;
+            color: var(--gold-primary);
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .loading-text::before,
+        .loading-text::after {
+            content: '•';
+            position: absolute;
+            color: var(--orange-primary);
+            font-size: 1.2rem;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        .loading-text::before {
+            left: -20px;
+            animation-delay: 0.2s;
+        }
+
+        .loading-text::after {
+            right: -20px;
+            animation-delay: 0.4s;
+        }
+
+        /* Emojis Container */
+        .emoji-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 22px;
+            opacity: 0;
+            filter: drop-shadow(0 0 6px var(--orange-primary));
+            animation: emojiPop 2s ease-out forwards;
+            z-index: 100;
+        }
+
+        /* Main App Styles */
+        #app {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .main-header {
+            padding: 15px 20px;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 107, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .logo-small {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: url('https://iili.io/fj31YHN.md.png') center/contain no-repeat;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 2px solid var(--orange-primary);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .brand-text h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(to right, var(--orange-primary), var(--gold-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .brand-text .tagline {
+            font-size: 0.85rem;
+            color: var(--light-text-secondary);
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 25px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+            flex: 1;
+            max-width: 150px;
+            text-align: center;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 107, 0, 0.2), 
+                transparent);
+            transition: left 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 0, 0.2), 
+                rgba(255, 209, 102, 0.1));
+            border-color: var(--orange-primary);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--orange-primary);
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--orange-primary), var(--gold-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 2px;
+            background: linear-gradient(to right, var(--orange-primary), var(--gold-primary));
+            border-radius: 3px;
+        }
+
+        /* Instagram Content */
+        .instagram-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .instagram-post {
+            width: 100%;
+            max-width: 350px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .instagram-post:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 107, 0, 0.3);
+            border-color: var(--orange-primary);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .instagram-post:hover .post-image {
+            transform: scale(1.08);
+        }
+
+        .post-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .instagram-post:hover .post-overlay {
+            transform: translateY(0);
+        }
+
+        .post-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--gold-primary);
+        }
+
+        .post-description {
+            font-size: 0.85rem;
+            color: var(--light-text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Instagram Reel */
+        .instagram-reel {
+            width: 100%;
+            max-width: 300px;
+            height: 535px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .instagram-reel:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 107, 0, 0.3);
+            border-color: var(--orange-primary);
+        }
+
+        .reel-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .instagram-reel:hover .reel-image {
+            transform: scale(1.08);
+        }
+
+        .reel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 18px;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .instagram-reel:hover .reel-overlay {
+            transform: translateY(0);
+        }
+
+        .reel-title {
+            font-size: 1rem;
+            margin-bottom: 6px;
+            color: var(--gold-primary);
+        }
+
+        .reel-description {
+            font-size: 0.8rem;
+            color: var(--light-text-secondary);
+            line-height: 1.3;
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 107, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
+        }
+
+        .instagram-reel:hover .video-play {
+            opacity: 1;
+        }
+
+        .video-play i {
+            color: white;
+            font-size: 20px;
+            margin-left: 3px;
+        }
+
+        /* Modal for Instagram Posts */
+        .instagram-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .instagram-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            background: var(--dark-surface);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 107, 0, 0.3);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .modal-info {
+            padding: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-description {
+            font-size: 0.95rem;
+            color: var(--light-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            z-index: 1001;
+        }
+
+        .modal-close:hover {
+            background: var(--orange-dark);
+            transform: rotate(90deg);
+        }
+
+        /* Video Player Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .video-player {
+            width: 90%;
+            max-width: 400px;
+            max-height: 90vh;
+            background: var(--dark-surface);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 107, 0, 0.3);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .video-element {
+            width: 100%;
+            height: 600px;
+            background: #000;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(17, 17, 17, 0.9);
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            color: var(--gold-primary);
+        }
+
+        .video-close {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 107, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .video-close:hover {
+            background: var(--orange-dark);
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
+        .main-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 40px;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 107, 0, 0.2);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--light-text-secondary);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            order: 2;
+        }
+        
+        .icon-bar {
+            display: flex;
+            gap: 10px;
+            order: 1;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light-text);
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .social-icon:hover {
+            background: var(--orange-primary);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
+            border-color: var(--orange-primary);
+        }
+
+        /* Animations */
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes frameGlow {
+            0% { 
+                box-shadow: 
+                    0 0 40px rgba(255, 107, 0, 0.4),
+                    0 0 80px rgba(255, 107, 0, 0.2),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
+            }
+            100% { 
+                box-shadow: 
+                    0 0 60px rgba(255, 107, 0, 0.6),
+                    0 0 100px rgba(255, 107, 0, 0.3),
+                    inset 0 0 30px rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        @keyframes cornerPulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: scale(1.2);
+                opacity: 1;
+                box-shadow: 0 0 15px var(--orange-primary);
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
+        }
+
+        @keyframes shineRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes emojiPop {
+            0% { 
+                transform: scale(0) rotate(0deg); 
+                opacity: 0;
+            }
+            20% { 
+                transform: scale(1.2) rotate(10deg); 
+                opacity: 1;
+                filter: drop-shadow(0 0 12px var(--orange-primary));
+            }
+            80% { 
+                opacity: 1;
+            }
+            100% { 
+                transform: scale(1) translateY(-100px) rotate(360deg); 
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Responsive Styles for Larger Screens */
+        @media (min-width: 768px) {
+            .logo-container {
+                width: 220px;
+                height: 220px;
+                margin-bottom: 40px;
+            }
+
+            .logo {
+                width: 170px;
+                height: 170px;
+            }
+
+            .loading-container {
+                width: 300px;
+            }
+
+            .loading-text {
+                font-size: 1.1rem;
+            }
+
+            .corner-decoration {
+                width: 20px;
+                height: 20px;
+            }
+
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .brand {
+                flex-direction: row;
+                text-align: right;
+            }
+
+            .logo-small {
+                width: 50px;
+                height: 50px;
+            }
+
+            .brand-text h1 {
+                font-size: 2rem;
+            }
+
+            .main-nav {
+                justify-content: flex-end;
+                width: auto;
+            }
+
+            .nav-btn {
+                max-width: 120px;
+                font-size: 1rem;
+                padding: 10px 24px;
+            }
+
+            .instagram-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .instagram-post {
+                width: calc(50% - 15px);
+                max-width: 320px;
+                height: 320px;
+            }
+
+            .instagram-reel {
+                width: calc(100% - 15px);
+                max-width: 400px;
+                height: 700px;
+            }
+
+            .modal-content {
+                max-width: 600px;
+            }
+
+            .modal-image {
+                height: 450px;
+            }
+
+            .video-player {
+                max-width: 500px;
+            }
+
+            .video-element {
+                height: 700px;
+            }
+
+            .main-footer {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+
+            .footer-text {
+                order: 1;
+            }
+            
+            .icon-bar {
+                order: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .logo-container {
+                width: 280px;
+                height: 280px;
+                margin-bottom: 60px;
+            }
+
+            .logo {
+                width: 220px;
+                height: 220px;
+            }
+
+            .loading-container {
+                width: 400px;
+            }
+
+            .loading-text {
+                font-size: 1.3rem;
+            }
+
+            .instagram-post {
+                width: calc(33.333% - 20px);
+                max-width: 380px;
+                height: 380px;
+            }
+
+            .instagram-reel {
+                width: calc(100% - 15px);
+                max-width: 500px;
+                height: 850px;
+            }
+
+            .modal-content {
+                max-width: 700px;
+            }
+
+            .modal-image {
+                height: 500px;
+            }
+
+            .video-player {
+                max-width: 600px;
+            }
+
+            .video-element {
+                height: 800px;
+            }
+
+            .main-header {
+                padding: 20px 40px;
+            }
+
+            .main-content {
+                padding: 40px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-container"></div>
+
+    <!-- Modal for Instagram Posts -->
+    <div class="instagram-modal" id="instagramModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-image" id="modalImage"></div>
+            <div class="modal-info">
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <p class="modal-description" id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal for Reels -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-player">
+            <video class="video-element" id="videoElement" controls>
+                <source id="videoSource" src="" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو.
+            </video>
+            <div class="video-controls">
+                <h3 class="video-title" id="videoTitle"></h3>
+                <button class="video-close" id="videoClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="intro" style="opacity: 1; visibility: visible;">
+        <div class="logo-container">
+            <div class="logo-frame">
+                <div class="corner-decoration"></div>
+                <div class="corner-decoration"></div>
+                <div class="corner-decoration"></div>
+                <div class="corner-decoration"></div>
+                <div class="logo"></div>
+            </div>
+            <div class="emoji-container" id="emojiContainer"></div>
+        </div>
+        <div class="loading-container">
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+            <div class="loading-text">جاري تحميل عالم النكهة ...</div>
+        </div>
+    </div>
+
+    <div id="app" style="display: none; opacity: 0;">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="brand">
+                    <div class="logo-small"></div>
+                    <div class="brand-text">
+                        <h1>مطعم سفرة الدار</h1>
+                        <p class="tagline">لتجربة طعام لا تنسى</p>
+                    </div>
+                </div>
+                <nav class="main-nav">
+                    <button class="nav-btn active" data-page="posts">منشورات</button>
+                    <button class="nav-btn" data-page="reels">ريلز</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="page active" id="posts">
+                <div class="page-header">
+                    <h2 class="page-title">منشورات انستجرام</h2>
+                </div>
+                <div class="instagram-container">
+                    <div class="instagram-post" data-image="https://iili.io/ft4Bjzx.png" data-title="كشتة على أصولها" data-description="ليلة صحراوية مع الربع، قاعدين حول صينية مليانة أكل من مطبخ سفرة الدار. ضحك ووناسة تحت ضوء القمر، والأكل يكتمل بروح الصحبة والمشاركة.">
+                        <div class="post-image" style="background-image: url('https://iili.io/ft4Bjzx.png')"></div>
+                        <div class="post-overlay">
+                            <h3 class="post-title">كشتة على أصولها</h3>
+                            <p class="post-description">ليلة صحراوية مع الربع، قاعدين حول صينية مليانة أكل من مطبخ سفرة الدار. ضحك ووناسة تحت ضوء القمر، والأكل يكتمل بروح الصحبة والمشاركة.</p>
+                        </div>
+                    </div>
+                    <div class="instagram-post" data-image="https://iili.io/ft4BEg9.png" data-title="من سفرة الدار.. لي باب داركم!" data-description="صورة تعكس مفهوم الراحة والخدمة السنعة في 'سفرة الدار'. طلبكم يوصلكم مغلف ومرتب، وحار جنكم توكم طابخينه. مهتمين بأدق التفاصيل من المطبخ ليما يوصل المندوب لي عند بابكم، عشان تستمتعون بألذ النقصات والأكلات الكويتية وأنتو مرتاحين بمكانكم. عليكم بالعافية مقدماً!">
+                        <div class="post-image" style="background-image: url('https://iili.io/ft4BEg9.png')"></div>
+                        <div class="post-overlay">
+                            <h3 class="post-title">من "سفرة الدار".. لي باب داركم!</h3>
+                            <p class="post-description">صورة تعكس مفهوم الراحة والخدمة السنعة في 'سفرة الدار'. طلبكم يوصلكم مغلف ومرتب، وحار جنكم توكم طابخينه. مهتمين بأدق التفاصيل من المطبخ ليما يوصل المندوب لي عند بابكم، عشان تستمتعون بألذ النقصات والأكلات الكويتية وأنتو مرتاحين بمكانكم. عليكم بالعافية مقدماً!</p>
+                        </div>
+                    </div>
+                    <div class="instagram-post" data-image="https://iili.io/ft4BV5u.png" data-title="وين ما تكون بالكويت.. سفرة الدار يمّك!" data-description="صورة تعبر عن الفخر والانتشار، بوجود العايلة جدام أبراج الكويت الغالية. الرسالة واضحة: 'سفرة الدار' صارت علامة مميزة ومعروفة وين ما تروحون. ببحث بسيط، بتلقونا قراب منكم وجاهزين نوصل لكم الطعم الكويتي الأصلي اللي يبيض الوجه. إحنا موجودين بكل دار، ومستعدين نشارككم أحلى الأوقات.">
+                        <div class="post-image" style="background-image: url('https://iili.io/ft4BV5u.png')"></div>
+                        <div class="post-overlay">
+                            <h3 class="post-title">وين ما تكون بالكويت.. "سفرة الدار" يمّك!</h3>
+                            <p class="post-description">صورة تعبر عن الفخر والانتشار، بوجود العايلة جدام أبراج الكويت الغالية. الرسالة واضحة: 'سفرة الدار' صارت علامة مميزة ومعروفة وين ما تروحون. ببحث بسيط، بتلقونا قراب منكم وجاهزين نوصل لكم الطعم الكويتي الأصلي اللي يبيض الوجه. إحنا موجودين بكل دار، ومستعدين نشارككم أحلى الأوقات.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="reels">
+                <div class="page-header">
+                    <h2 class="page-title">ريلز انستجرام</h2>
+                </div>
+                <div class="instagram-container">
+                    <div class="instagram-reel" data-video="https://assets.mixkit.co/videos/preview/mixkit-woman-cooking-vegetables-in-a-pan-1175-large.mp4" data-title="تحضير طبق خاص" data-description="شاهد كيفية تحضير أحد أطباقنا المميزة خطوة بخطوة." data-thumbnail="https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                        <div class="reel-image" style="background-image: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"></div>
+                        <div class="reel-overlay">
+                            <h3 class="reel-title">تحضير طبق خاص</h3>
+                            <p class="reel-description">شاهد كيفية تحضير أحد أطباقنا المميزة خطوة بخطوة.</p>
+                        </div>
+                        <div class="video-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="main-footer">
+            <p class="footer-text">مطعم سفرة الدار © 2026 جميع الحقوق محفوظة</p>
+            
+            <div class="icon-bar">
+                <a href="https://www.instagram.com/safaruh_aldaar/" target="_blank" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                
+                
+                <a href="https://wa.link/2h6h57" target="_blank" class="social-icon" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // قائمة الإيموجيز الخاصة بالطعام والطبخ
+        const foodEmojis = ['🍕', '🍔', '🌮', '🍣', '🍜', '🍝', '🍛', '🍤', '🥗', '🥘', '🍲', '🍱', '🥪', '🍰', '🧁', '🥧', , '🍨', '🍧', '☕', '🍵', '🥤', '🍺', '🍷', '🥂', '🍴', '🥄', '🔪', '🍳', '🥑', '🥦', '🥬', '🥒', '🌽', '🥕', '🍅', '🍆', '🧀', , '🥩', '🍗', '🥓', '🧂', '🍋', '🍓', '🍇', '🍉', '🍌', '🍎', '🍐', '🍊', '🍑', '🍒'];
+
+        // Create glowing particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'glow-particle';
+                
+                const size = Math.random() * 6 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}vw`;
+                
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Intro Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const intro = document.getElementById('intro');
+            const app = document.getElementById('app');
+            const emojiContainer = document.getElementById('emojiContainer');
+            
+            // Create food emojis after loading bar completes
+            setTimeout(() => {
+                for (let i = 0; i < 25; i++) {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji';
+                    emoji.textContent = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 100 + Math.random() * 60;
+                    const x = Math.cos(angle) * distance;
+                    const y = Math.sin(angle) * distance;
+                    
+                    emoji.style.left = `calc(50% + ${x}px)`;
+                    emoji.style.top = `calc(50% + ${y}px)`;
+                    emoji.style.animationDelay = `${Math.random() * 0.3}s`;
+                    
+                    const size = 20 + Math.random() * 16;
+                    emoji.style.fontSize = `${size}px`;
+                    
+                    emojiContainer.appendChild(emoji);
+                }
+            }, 2500);
+            
+            // Hide intro and show app
+            setTimeout(() => {
+                intro.style.opacity = '0';
+                intro.style.visibility = 'hidden';
+                
+                app.style.display = 'block';
+                setTimeout(() => {
+                    app.style.opacity = '1';
+                }, 100);
+            }, 3500);
+            
+            // Initialize modals and event listeners
+            initializeModals();
+        });
+
+        // Navigation
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const pages = document.querySelectorAll('.page');
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                pages.forEach(page => page.classList.remove('active'));
+                
+                button.classList.add('active');
+                const pageId = button.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+            });
+        });
+
+        // Initialize Modals and Event Listeners
+        function initializeModals() {
+            // Get modal elements
+            const instagramModal = document.getElementById('instagramModal');
+            const videoModal = document.getElementById('videoModal');
+            const modalClose = document.getElementById('modalClose');
+            const videoClose = document.getElementById('videoClose');
+            const videoElement = document.getElementById('videoElement');
+            
+            // Instagram Post Click Events
+            const instagramPosts = document.querySelectorAll('.instagram-post');
+            instagramPosts.forEach(post => {
+                post.addEventListener('click', function() {
+                    const imageUrl = this.getAttribute('data-image');
+                    const title = this.getAttribute('data-title');
+                    const description = this.getAttribute('data-description');
+                    
+                    // Set modal content
+                    document.getElementById('modalImage').style.backgroundImage = `url('${imageUrl}')`;
+                    document.getElementById('modalTitle').textContent = title;
+                    document.getElementById('modalDescription').textContent = description;
+                    
+                    // Show modal
+                    instagramModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Instagram Reel Click Events
+            const instagramReels = document.querySelectorAll('.instagram-reel');
+            instagramReels.forEach(reel => {
+                reel.addEventListener('click', function() {
+                    const videoUrl = this.getAttribute('data-video');
+                    const title = this.getAttribute('data-title');
+                    
+                    // Set video content
+                    document.getElementById('videoSource').src = videoUrl;
+                    document.getElementById('videoTitle').textContent = title;
+                    videoElement.load();
+                    
+                    // Show video modal
+                    videoModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Play video automatically
+                    setTimeout(() => {
+                        videoElement.play().catch(e => console.log("Autoplay prevented:", e));
+                    }, 300);
+                });
+            });
+            
+            // Close Modal Events
+            modalClose.addEventListener('click', function() {
+                instagramModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            videoClose.addEventListener('click', function() {
+                videoModal.classList.remove('active');
+                videoElement.pause();
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modals when clicking outside
+            instagramModal.addEventListener('click', function(e) {
+                if (e.target === instagramModal) {
+                    instagramModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    videoModal.classList.remove('active');
+                    videoElement.pause();
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modals with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    instagramModal.classList.remove('active');
+                    videoModal.classList.remove('active');
+                    videoElement.pause();
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
