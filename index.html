@@ -487,11 +487,11 @@
             line-height: 1.4;
         }
 
-        /* Instagram Reel */
+        /* Instagram Reel - 3:4 Aspect Ratio */
         .instagram-reel {
             width: 100%;
-            max-width: 300px;
-            height: 535px;
+            max-width: 300px; /* حافظنا على العرض مع تغيير الارتفاع فقط */
+            height: 400px; /* تغيير من 535px إلى 400px لتصبح النسبة 3:4 */
             background: rgba(255, 255, 255, 0.03);
             border-radius: 15px;
             overflow: hidden;
@@ -501,6 +501,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
+            aspect-ratio: 3/4; /* إضافة خاصية aspect-ratio */
         }
 
         .instagram-reel:hover {
@@ -527,7 +528,7 @@
             left: 0;
             width: 100%;
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-            padding: 18px;
+            padding: 15px;
             transform: translateY(100%);
             transition: var(--transition);
         }
@@ -693,7 +694,7 @@
 
         .video-element {
             width: 100%;
-            height: 600px;
+            height: 500px; /* تعديل الارتفاع ليتناسب مع النسبة 3:4 */
             background: #000;
             object-fit: cover;
         }
@@ -956,10 +957,12 @@
                 height: 320px;
             }
 
+            /* تعديل الريلز للشاشات المتوسطة */
             .instagram-reel {
                 width: calc(100% - 15px);
-                max-width: 400px;
-                height: 700px;
+                max-width: 300px; /* حافظنا على نفس العرض */
+                height: 400px; /* حافظنا على نفس الارتفاع */
+                aspect-ratio: 3/4; /* خاصية aspect-ratio تظل فعالة */
             }
 
             .modal-content {
@@ -971,11 +974,11 @@
             }
 
             .video-player {
-                max-width: 500px;
+                max-width: 400px;
             }
 
             .video-element {
-                height: 700px;
+                height: 533px; /* 400 * (4/3) = 533px للنسبة 3:4 */
             }
 
             .main-footer {
@@ -1019,10 +1022,12 @@
                 height: 380px;
             }
 
+            /* تعديل الريلز للشاشات الكبيرة */
             .instagram-reel {
                 width: calc(100% - 15px);
-                max-width: 500px;
-                height: 850px;
+                max-width: 300px; /* حافظنا على نفس العرض */
+                height: 400px; /* حافظنا على نفس الارتفاع */
+                aspect-ratio: 3/4;
             }
 
             .modal-content {
@@ -1034,11 +1039,11 @@
             }
 
             .video-player {
-                max-width: 600px;
+                max-width: 450px; /* زيادة طفيفة للشاشات الكبيرة */
             }
 
             .video-element {
-                height: 800px;
+                height: 600px; /* 450 * (4/3) = 600px للنسبة 3:4 */
             }
 
             .main-header {
